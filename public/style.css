@@ -1,0 +1,190 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  background: #0b0f14;
+  color: #e8eef7;
+}
+.wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
+header h1 { margin: 0 0 8px; font-size: 28px; }
+header p { margin: 0 0 18px; color: #b6c2d6; }
+
+.muted { color: #93a4bf; font-size: 13px; }
+
+.drop {
+  border: 2px dashed #2b3b55;
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #0f1620;
+}
+.drop.dragover { border-color: #6aa6ff; }
+.drop input[type="file"] { color: #b6c2d6; }
+
+.grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 900px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+}
+
+.card {
+  background: #0f1620;
+  border: 1px solid #1f2a3b;
+  border-radius: 14px;
+  padding: 16px;
+}
+.card h2 { margin: 0 0 12px; font-size: 16px; color: #cfe0ff; }
+
+.stage {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #0b0f14;
+  border: 1px solid #1f2a3b;
+  border-radius: 12px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.stage img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+.row { margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap; }
+button {
+  appearance: none;
+  border: 1px solid #2b3b55;
+  background: #132033;
+  color: #e8eef7;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+button:disabled { opacity: .5; cursor: not-allowed; }
+button:hover:not(:disabled) { border-color: #6aa6ff; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas; }
+
+.processing-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.55);
+  z-index: 9999;
+  padding: 24px;
+}
+
+.processing-overlay.is-visible {
+  display: flex;
+}
+
+.processing-card {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  background: #0f1620;
+  border: 1px solid #1f2a3b;
+  border-radius: 14px;
+  padding: 16px 18px;
+  max-width: 520px;
+  width: 100%;
+}
+
+.processing-spinner {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 3px solid rgba(255,255,255,0.25);
+  border-top-color: rgba(255,255,255,0.9);
+  animation: processing-spin 0.9s linear infinite;
+}
+
+@keyframes processing-spin { to { transform: rotate(360deg); } }
+
+/* Full-width controls section under drop area */
+.controls-wide {
+  margin-top: 14px;
+  margin-bottom: 18px;
+}
+
+.controls-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Make sliders feel more “global” than card-scoped */
+.controls-wide .adjustments {
+  background: linear-gradient(180deg, rgba(20,28,44,0.9), rgba(12,18,30,0.9));
+  border: 1px solid #1f2a3b; /* same border as .card */
+  border-radius: 14px;       /* match card rounding */
+}
+
+/* Collapse controls until an image is loaded */
+.controls-wide {
+  overflow: hidden;
+  max-height: 800px;
+  opacity: 1;
+  transition: max-height 200ms ease, opacity 200ms ease;
+}
+
+.controls-wide.is-collapsed {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media (max-width: 700px) {
+  .controls-inner {
+    padding: 0 16px;
+  }
+}
+
+.controls-row{
+  display:flex;
+  gap:14px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin: 0 0 10px;
+}
+
+.control{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.control-label{
+  color:#b6c2d6;
+  font-size:13px;
+  font-weight:600;
+}
+
+.control input[type="number"]{
+  width:120px;
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid #2b3b55;
+  background:#0b0f14;
+  color:#e8eef7;
+}
+
+.control-suffix{
+  color:#93a4bf;
+  font-size:13px;
+}
+
+.control-inline{
+  gap:8px;
+}

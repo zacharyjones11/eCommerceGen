@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Product Prep (BG Remove + Enhance + 1:1 Crop)</title>
+
+  <!-- Cropper.js (CDN) -->
+  <link rel="stylesheet" href="https://unpkg.com/cropperjs@1.6.2/dist/cropper.min.css" />
+  <script defer src="https://unpkg.com/cropperjs@1.6.2/dist/cropper.min.js"></script>
+
+  <link rel="stylesheet" href="/style.css" />
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <h1>Product Prep</h1>
+      <p>Drag &amp; drop → background removed → colour enhanced → auto 1:1 ecommerce crop (plus manual crop tools).</p>
+    </header>
+
+    <div id="processingOverlay" class="processing-overlay" aria-hidden="true">
+      <div class="processing-card">
+        <div class="processing-spinner" aria-hidden="true"></div>
+        <div>
+          <div class="processing-title">Processing…</div>
+          <div class="processing-subtitle">Removing background and preparing crops.</div>
+        </div>
+      </div>
+    </div>
+
+    <section id="drop" class="drop">
+      <div>
+        <strong>Drop an image here</strong>
+        <div class="muted">PNG/JPG up to 20MB</div>
+      </div>
+      <input id="file" type="file" accept="image/*" />
+    </section>
+<div class="controls-row">
+  <label class="control">
+    <span class="control-label">Output size</span>
+    <input id="outSize" type="number" min="300" max="4000" step="50" value="1200" />
+    <span class="control-suffix">px</span>
+  </label>
+
+  <label class="control control-inline">
+    <input id="enhanceToggle" type="checkbox" checked />
+    <span class="control-label">Enhance colours</span>
+  </label>
+</div>
+<section id="controlsWide" class="controls-wide is-collapsed" aria-hidden="true">      <div class="adjustments">
+        <div class="adjustments-head">
+          <div class="adjustments-title">Colour adjustments</div>
+          <button id="resetAdjust" type="button" class="btn-secondary">Reset</button>
+        </div>
+
+        <label class="adj-row">
+          <span class="adj-label">Saturation</span>
+          <input id="satSlider" type="range" min="0" max="200" step="1" value="115" />
+          <span id="satVal" class="adj-val">115%</span>
+        </label>
+
+        <label class="adj-row">
+          <span class="adj-label">Contrast</span>
+          <input id="conSlider" type="range" min="50" max="150" step="1" value="103" />
+          <span id="conVal" class="adj-val">103%</span>
+        </label>
+
+        <label class="adj-row">
+          <span class="adj-label">Brightness</span>
+          <input id="briSlider" type="range" min="50" max="150" step="1" value="102" />
+          <span id="briVal" class="adj-val">102%</span>
+        </label>
+
+        <div class="muted">These adjustments apply to the manual crop preview and the exported manual PNG.</div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Auto 1:1 (1200×1200)</h2>
+        <div class="stage">
+          <img id="autoOut" alt="Auto output" />
+        </div>
+        <div class="row">
+          <button id="downloadAuto" disabled>Download Auto PNG</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Manual Crop (locked 1:1)</h2>
+
+        <!-- Zoom controls (used by app.js) -->
+        <div class="zoom-controls">
+          <button id="zoomOutBtn" type="button" class="btn-secondary">−</button>
+          <input id="zoomSlider" type="range" min="0.1" max="2.5" step="0.01" value="0.2" aria-label="Zoom" />
+          <button id="zoomInBtn" type="button" class="btn-secondary">+</button>
+          <span id="zoomLabel" class="zoom-label">20%</span>
+        </div>
+
+        <div class="stage stage-manual">
+          <img id="manualImg" alt="Manual crop source" />
+        </div>
+
+        <div class="row">
+          <button id="exportManual" disabled>Export Cropped PNG</button>
+          <button id="downloadManual" disabled>Download Manual PNG</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="muted">
+      Tip: If your products look too “punchy”, we can dial back saturation/contrast in <code>enhancePngBuffer()</code>.
+    </footer>
+  </main>
+</body>
+</html>
