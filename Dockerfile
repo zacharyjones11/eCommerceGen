@@ -10,6 +10,7 @@ COPY package*.json ./
 RUN npm install --omit=dev --no-audit --no-fund
 
 # Copy the application source after dependencies are installed.
+COPY app.js ./
 COPY server.js ./
 COPY public ./public
 
